@@ -7,9 +7,6 @@ on:
         type: string
         description: 'The tag to use for the Docker image'
         required: true
-  push:
-    branches:
-      - main
 
 
 concurrency:
