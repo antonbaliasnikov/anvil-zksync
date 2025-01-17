@@ -1,0 +1,19 @@
+{
+  "bootstrap_sha": "f7638c2fd2f1865a7be916837e40970feac4961f",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "release-type": "simple",
+  "separate-pull-requests": false,
+  "skip-github-release": false,
+  "draft": true,
+  "packages": {
+    ".": {
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "Cargo.toml"
+        }
+      ]
+    }
+  }
+}
