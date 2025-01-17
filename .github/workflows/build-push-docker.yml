@@ -20,9 +20,7 @@ jobs:
 
   build-push-image:
     name: Build and Push Docker Image
-    runs-on: matterlabs-ci-runner-high-performance
-    env:
-      DOCKERHUB_IMAGE: us-docker.pkg.dev/matterlabs-infra/matterlabs-docker/anvil-zksync
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,7 +32,7 @@ jobs:
         shell: 'bash -ex {0}'
         run: |
           [ ! -z "${{ inputs.tag }}" ] && BASE_TAG="${{ inputs.tag }}" \
-            || BASE_TAG="$(git rev-parse --short HEAD)-$(date +%s%N | cut -b1-13)" 
+            || BASE_TAG="$(git rev-parse --short HEAD)-$(date +%s%N | cut -b1-13)"
           echo "base_tag=${BASE_TAG}" >> "${GITHUB_OUTPUT}"
 
       - name: Login to GAR
@@ -61,7 +59,6 @@ jobs:
           cache-to: type=gha,mode=max
           tags: |
             ghcr.io/${{ github.repository }}:${{ steps.set_tag.outputs.base_tag }}
-            ${{ env.DOCKERHUB_IMAGE }}:${{ steps.set_tag.outputs.base_tag }}
 
       - name: Generate docker image attestation
         if: ${{ inputs.tag != '' }}
@@ -70,8 +67,3 @@ jobs:
           subject-name: ghcr.io/${{ github.repository }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
-
-      - name: Print image digest to summary
-        run: |
-          echo "Image tags: ghcr.io/${{ github.repository }}:${{ steps.set_tag.outputs.base_tag }}" >> "${GITHUB_STEP_SUMMARY}"
-          echo "Image tags: ${{ env.DOCKERHUB_IMAGE }}:${{ steps.set_tag.outputs.base_tag }}" >> "${GITHUB_STEP_SUMMARY}"

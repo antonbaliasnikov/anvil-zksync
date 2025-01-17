@@ -2,11 +2,12 @@
   "bootstrap_sha": "f7638c2fd2f1865a7be916837e40970feac4961f",
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": true,
-  "include-component-in-tag": false,
   "release-type": "simple",
+  "separate-pull-requests": false,
+  "skip-github-release": false,
+  "draft": true,
   "packages": {
     ".": {
-      "component": "anvil-zksync",
       "extra-files": [
         {
           "type": "generic",
