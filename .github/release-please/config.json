@@ -1,10 +1,7 @@
 {
-  "bootstrap_sha": "f7638c2fd2f1865a7be916837e40970feac4961f",
-  "bump-minor-pre-major": true,
-  "bump-patch-for-minor-pre-major": true,
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "release-type": "simple",
-  "separate-pull-requests": false,
-  "skip-github-release": false,
+  "include-component-in-tag": false,
   "draft": true,
   "packages": {
     ".": {
