@@ -1,10 +1,13 @@
 {
-  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap_sha": "f7638c2fd2f1865a7be916837e40970feac4961f",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
   "release-type": "simple",
-  "include-component-in-tag": false,
+  "group-pull-request-title-pattern": "chore: release ${component} ${branch} ${version}",
   "draft": true,
   "packages": {
     ".": {
+      "component": "anvil-zksync",
       "extra-files": [
         {
           "type": "generic",
