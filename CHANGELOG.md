@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.6](https://github.com/antonbaliasnikov/anvil-zksync/compare/v0.2.5...v0.2.6) (2025-01-21)
+
+
+### Features
+
+* test ([aab4889](https://github.com/antonbaliasnikov/anvil-zksync/commit/aab4889fa7dbeddedd0b4f01e1387178a544c559))
+
 ## [0.2.5](https://github.com/antonbaliasnikov/anvil-zksync/compare/v0.2.4...v0.2.5) (2025-01-17)
 
 
