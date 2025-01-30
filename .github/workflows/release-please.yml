@@ -75,7 +75,7 @@ jobs:
 
       - name: get sha from PR number and save output
         id: get-sha
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -90,7 +90,7 @@ jobs:
 
       - name: Report tests check
         if: ${{ github.event.inputs.used-branch && steps.tests-step.outcome }}
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
