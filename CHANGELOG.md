@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.2.6](https://github.com/antonbaliasnikov/anvil-zksync/compare/v0.2.5...v0.2.6) (2025-01-30)
+
+
+### Features
+
+* test ([085e9f6](https://github.com/antonbaliasnikov/anvil-zksync/commit/085e9f65e078f341efd3a877ccc92b45b211f51f))
+* test ([71449cd](https://github.com/antonbaliasnikov/anvil-zksync/commit/71449cd8a946a9878488aec6ca0834e50a724e5f))
+* test ([b84ce12](https://github.com/antonbaliasnikov/anvil-zksync/commit/b84ce126d927ed223db0d88c0f78686568ba9fd1))
+* test ([c5f3b52](https://github.com/antonbaliasnikov/anvil-zksync/commit/c5f3b52f50db430ecc9ee7eb923ce9bc046ede2a))
+* test ([a520cf3](https://github.com/antonbaliasnikov/anvil-zksync/commit/a520cf3d392cba29ad8afca06aeb2f204cf02850))
+* test ([ac8122d](https://github.com/antonbaliasnikov/anvil-zksync/commit/ac8122db5f228cdeb2abc9a1415572af34227166))
+* test ([0a5d19b](https://github.com/antonbaliasnikov/anvil-zksync/commit/0a5d19b5824a352156c149ca116d8d51d5505612))
+* test ([0763550](https://github.com/antonbaliasnikov/anvil-zksync/commit/0763550b55653fc8e0746f8a497d9176a6041517))
+* test ([ef9e23d](https://github.com/antonbaliasnikov/anvil-zksync/commit/ef9e23d050c369a773c5f67b1751dc6cd2df33a6))
+
 ## [0.2.5](https://github.com/antonbaliasnikov/anvil-zksync/compare/v0.2.4...v0.2.5) (2025-01-17)
 
 
