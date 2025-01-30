@@ -76,5 +76,6 @@ jobs:
             -f name="Test Check" \
             -f head_sha="${SHA}" \
             -f status="completed" \
+            -f "conclusion=${{ steps.tests-step.conclusion }}"
             -f "output[title]=Run tests" \
             -f "output[summary]=Results: ${{ steps.tests-step.conclusion }}"
