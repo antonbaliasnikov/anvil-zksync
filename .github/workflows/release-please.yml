@@ -58,13 +58,51 @@ jobs:
     if: ${{ needs.release-please.outputs.prs_created == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Workflow
+
+      - name: Trigger testing workflow
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        id: tests-step
+        with:
+          owner: ${{ github.repository_owner}}
+          repo: ${{ github.event.repository.name }}
+          workflow_file_name: test.yml
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ fromJson(needs.release-please.outputs.prs)[0].headBranchName }}
+          wait_interval: 30
+          propagate_failure: true
+          trigger_workflow: true
+          wait_workflow: true
+
+      - name: get sha from PR number and save output
+        id: get-sha
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            github.rest.actions.createWorkflowDispatch({
+            console.log('PR number: ' + ${{ fromJson(needs.release-please.outputs.prs)[0].number }})
+            const pr = await github.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              workflow_id: 'test.yml',
-              ref: '${{ fromJson(needs.release-please.outputs.prs)[0].headBranchName }}',
+              pull_number: ${{ fromJson(needs.release-please.outputs.prs)[0].number }}
+            })
+            console.log('PR Head sha: ' + pr.data.head.sha)
+            core.setOutput('sha', pr.data.head.sha)
+
+      - name: Report tests check
+        if: ${{ github.event.inputs.used-branch && steps.tests-step.outcome }}
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.checks.create({
+              name: 'test',
+              head_sha: '${{ steps.get-sha.outputs.sha }}',
+              status: 'completed',
+              conclusion: '${{ steps.tests-step.outcome }}',
+              output: {
+                title: 'Run tests',
+                summary: 'Results: ${{ steps.tests-step.outcome }}'
+              },
+              owner: context.repo.owner,
+              repo: context.repo.repo
             })
