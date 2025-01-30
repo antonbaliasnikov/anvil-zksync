@@ -73,23 +73,16 @@ jobs:
           trigger_workflow: true
           wait_workflow: true
 
-      - name: get sha from PR number and save output
+      - name: Get SHA
         id: get-sha
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            console.log('PR number: ' + ${{ fromJson(needs.release-please.outputs.prs)[0].number }})
-            const pr = await github.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: ${{ fromJson(needs.release-please.outputs.prs)[0].number }}
-            })
-            console.log('PR Head sha: ' + pr.data.head.sha)
-            core.setOutput('sha', pr.data.head.sha)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          SHA=$(gh api repos/${{ github.repository }}/pulls/${{ fromJson(needs.release-please.outputs.prs)[0].number }} --jq '.head.sha')
+          echo "sha=$SHA" >> "${GITHUB_OUTPUT}"
 
       - name: Report tests check
-        if: ${{ github.event.inputs.used-branch && steps.tests-step.outcome }}
+        if: ${{ steps.tests-step.conclusion != '' }}
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -98,10 +91,10 @@ jobs:
               name: 'test',
               head_sha: '${{ steps.get-sha.outputs.sha }}',
               status: 'completed',
-              conclusion: '${{ steps.tests-step.outcome }}',
+              conclusion: '${{ steps.tests-step.conclusion }}',
               output: {
                 title: 'Run tests',
-                summary: 'Results: ${{ steps.tests-step.outcome }}'
+                summary: 'Results: ${{ steps.tests-step.conclusion }}'
               },
               owner: context.repo.owner,
               repo: context.repo.repo
